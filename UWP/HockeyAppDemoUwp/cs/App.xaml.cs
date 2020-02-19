@@ -43,10 +43,12 @@ namespace HockeyAppDemo
             //    {
             //        return "Exception HResult: " + ex.HResult.ToString();
             //    });
-            
+
+            AppCenter.LogLevel = LogLevel.Verbose;
+            AppCenter.SetLogUrl("https://in-integration.dev.avalanch.es");
             AppCenter.Start("8d18c973-f5c9-46ec-81e3-d75708722a10",
                    typeof(Analytics), typeof(Crashes));
-            
+
             // Microsoft.HockeyApp.HockeyClient.Current.Configure(DemoConstants.YOUR_APP_ID);
 
             this.InitializeComponent();
