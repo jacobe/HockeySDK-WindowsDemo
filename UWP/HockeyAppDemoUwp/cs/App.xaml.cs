@@ -18,6 +18,7 @@ using Microsoft.HockeyApp;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 
 namespace HockeyAppDemo
@@ -62,7 +63,7 @@ namespace HockeyAppDemo
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+            BackgroundServices.MyBackgroundTask.Register();
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
