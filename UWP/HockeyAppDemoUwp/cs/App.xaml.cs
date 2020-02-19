@@ -15,7 +15,9 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.HockeyApp;
-
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 
 namespace HockeyAppDemo
@@ -34,16 +36,19 @@ namespace HockeyAppDemo
             // Note: This configuration will start a session even when the UWP application is prelaunched
             // by the operating system. If this behavior is undesirable, and you only want to start Hockey App
             // when the user explicitly starts the application, see the commented code in MainPage.xaml.cs
-            HockeyClient.Current.Configure(DemoConstants.YOUR_APP_ID,
-                new TelemetryConfiguration() { EnableDiagnostics = true})
-                .SetContactInfo("DemoUser", "demoapp@hotmail.com")
-                .SetExceptionDescriptionLoader((Exception ex) =>
-                {
-                    return "Exception HResult: " + ex.HResult.ToString();
-                });
-
-            // Microsoft.HockeyApp.HockeyClient.Current.Configure(DemoConstants.YOUR_APP_ID);
+            //HockeyClient.Current.Configure(DemoConstants.YOUR_APP_ID,
+            //    new TelemetryConfiguration() { EnableDiagnostics = true})
+            //    .SetContactInfo("DemoUser", "demoapp@hotmail.com")
+            //    .SetExceptionDescriptionLoader((Exception ex) =>
+            //    {
+            //        return "Exception HResult: " + ex.HResult.ToString();
+            //    });
             
+            AppCenter.Start("8d18c973-f5c9-46ec-81e3-d75708722a10",
+                   typeof(Analytics), typeof(Crashes));
+            
+            // Microsoft.HockeyApp.HockeyClient.Current.Configure(DemoConstants.YOUR_APP_ID);
+
             this.InitializeComponent();
             this.Construct();
         }
@@ -55,7 +60,7 @@ namespace HockeyAppDemo
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            BackgroundServices.MyBackgroundTask.Register();
+
 
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
